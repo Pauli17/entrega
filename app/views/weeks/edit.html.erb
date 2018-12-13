@@ -40,6 +40,11 @@
 	<% elsif current_user.user_type_id == 2 && current_user.credits > 0 %>
 		<% if (@week.status_id == 1 || @week.status_id == 4)%>
 			<h3 class="text-white mb-3 text-center">¿Seguro que desea reservar la semana <b><%= @week.period.strftime('%d/%m/%Y') %></b> de la residencia <b><%= Residence.find(@week.residence_id).title %></b>? </h3>
+			<% if @week.status_id == 1 %>
+				<h6 class="text-white mb-3 text-center">Le serán descontados $<%= Residence.find(@week.residence_id).price %> de su cuenta </h6>
+			<% else %>
+				<h6 class="text-white mb-3 text-center">Le serán descontados $<%= Residence.find(@week.residence_id).priceHotSale %> de su cuenta </h6>
+			<% end %>
 			<div class="row mt-5 justify-content-center"> 
 				<%= form_for @week do |f|%>
 					<div class "form-group">
@@ -61,7 +66,8 @@
 		<% end %>
 	<% elsif current_user.user_type_id == 3 && current_user.credits > 0 %>
 		<% if (@week.status_id == 4)%>
-			<h3 class="text-white mb-3 text-center">¿Seguro que desea reservar la semana <b><%= @week.period.strftime('%d/%m/%Y') %></b> de la residencia <b><%= Residence.find(@week.residence_id).title %></b>? </h3> 
+			<h3 class="text-white mb-3 text-center">¿Seguro que desea reservar la semana <b><%= @week.period.strftime('%d/%m/%Y') %></b> de la residencia <b><%= Residence.find(@week.residence_id).title %></b>? </h3>
+			<h6 class="text-white mb-3 text-center">Le serán descontados $<%= Residence.find(@week.residence_id).priceHotSale %> de su cuenta </h6> 
 			<div class="row mt-5 justify-content-center">
 				<%= form_for @week do |f|%>
 					<div class "form-group">

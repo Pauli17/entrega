@@ -1,0 +1,58 @@
+<% if (user_signed_in?) && ((current_user.user_type_id == 4) ||(current_user.user_type_id == 1)) %>
+        <div class="container-fluid bg-dark pb-4">
+          <div class="text-center">
+            <br>
+              <h2 class="text-white mb-3">Listado de Clientes</h2>
+          </div>
+          <br>
+          <div class="row">
+            <table style="table", class="table table-dark">
+              <thead>
+                <tr>
+                  <th width "100%"> Correo electronico</th>
+                  <th width "80%"> Nombre </th>
+                  <th width "80%"> Apellido </th>
+
+                  <th width "80%"> Tipo de usuario </th>
+                  <th colspan="4"> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <%@hay_usuario=0%>
+                <% @usuarios.each do |usuario| %>
+                  <tr>
+                    <% if (usuario.user_type_id == 2) || (usuario.user_type_id == 3) %>
+                    <td> <%= link_to usuario.email, user_path(usuario)%> </td>
+                            <td> <%= usuario.name %> </td>
+                            <td> <%= usuario.lastname %> </td>
+                            <td><%= UserType.find(usuario.user_type_id).name %> </td>
+                            <%@hay_usuario=1%>
+                            <% if (usuario.user_type_id == 2)%>
+                                  <td><%= link_to "Cambiar a Base", user_change_base_path(usuario), class: 'btn btn-info btn-warning'%> </td>
+                            <% elsif (usuario.user_type_id == 3)%>
+                                <td><%= link_to "Cambiar a Premium",user_change_premium_path(usuario), class: 'btn btn-info btn-warning'%> </td>
+                            <%end%>
+                            <% if (current_user.user_type_id == 4) %>
+                            <td><%= link_to "Hacer Administrador", user_change_admin_path(usuario), class: 'btn btn-info btn-secondary' %> </td>
+                              <%end%>
+                      <%end%>
+                  </tr>
+                  <%end%>
+                   <% if (@hay_usuario==0) %>
+                     <h3 class="text-white mb-3">Actualmente no hay clientes registrados</h3>
+                    <% end %>
+                </tbody>
+              </table>
+            </div>
+
+
+
+<%else %>
+<br>
+  <div class='text-white mb-3 text-center'>
+  <h3> Upss...No puedes estar aqui, mejor regresa </h3>
+</div>
+  <button class="btn btn-block btn-light col-4 offset-4 mt-3"> <%= link_to "Volver", root_path %>
+</button>
+</div>
+<%end%>

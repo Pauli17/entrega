@@ -1,0 +1,49 @@
+<%if user_signed_in?%>
+<div class="container-fluid bg-dark pb-4">
+	<div class="text-center">
+			<h2 class="text-white mb-3"><%=@residence.title%></h2>
+		</div>
+		<div class="row">
+
+		<img src="<%=@residence.image%>" class="style_image shadow p-3 mb-5 bg-secondary rounded col-8 offset-2" height="470px" width="300 px">
+
+
+		<div class="card text-white bg-dark col-4 mt-3" >
+		  <div class="card-header text-center bg-primary"><h5>Ubicación</h5></div>
+		  <div class="card-body">
+		    	<ul class="card-text text-justify">
+		    		<li>Dirección: <%=@residence.address%></li>
+		    		<li>País: <%=@residence.country%></li>
+		    		<li>Provincia: <%=@residence.province%></li>
+		    		<li>Localidad: <%=@residence.locality%></li>
+		    	</ul>
+		  </div>
+		</div>
+
+		<div class="card text-white bg-dark col-8 mt-3" >
+		  <div class="card-header text-center bg-primary"><h5>Descripción</h5></div>
+		  <div class="card-body">
+		    <p class="card-text text-justify">
+		    	<%=@residence.description%>
+		    </p>
+		  </div>
+		</div>
+		<%if user_signed_in? && ((current_user.user_type_id == 1) || (current_user.user_type_id == 4) )%>
+		<button class="btn btn-lg btn-block btn-white col-2 offset-3 mt-3"><%= link_to "Semanas", residence_weeks_path(@residence)%></button>
+		<% else%>
+		<button class="btn btn-lg btn-block btn-white col-2 offset-3 mt-3"><%= link_to "Semanas en Hotsale", residence_weeks_path(@residence)%></button>
+		<% end %>
+		<button class="btn btn-lg btn-block btn-white col-2 offset-2 mt-3"><%= link_to "Volver", residences_path%></button>
+	</div>
+</div>
+<%else%>
+
+<div class='text-white mb-3 text-center'>
+	<br>
+	<br>
+  <h3> Debes iniciar sesion para poder ver la residencia </h3>
+  </div>
+
+<button class="btn btn-lg btn-block btn-white col-2 offset-5 mt-3"><%= link_to "Volver", root_path %></button>
+
+<%end%>

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 	default_scope -> { order("email") }
+
 	validates :date_venc_month, presence:true
   validates :date_venc_year, presence:true
 	validates :name, presence:true

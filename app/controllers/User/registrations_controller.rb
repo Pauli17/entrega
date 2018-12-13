@@ -6,13 +6,13 @@ class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  
+
   # POST /resource
   def create
    super
    @user=User.new(params.required(:user).permit(:date_venc_month,:date_venc_year,:cod,:card_Number,
       :name,:image,:date_of_birth,:email,:lastname,:password,:password_confirmation,
-      :card_Marca)
+      :card_Marca))
     if @user.save
         redirect_to :back , notice: 'Usuario creado exitosamente'
     else
@@ -42,7 +42,7 @@ end
         redirect_to root_path,notice: "Error al eliminar cuenta"
       end
     end
-
+end
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to

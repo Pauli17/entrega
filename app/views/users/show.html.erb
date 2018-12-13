@@ -48,7 +48,7 @@
 		<div class="row">
 			<%if (current_user.user_type_id == @usuario.user_type_id)%>
 						<button class="btn btn-lg btn-block btn-white col-2 offset-2 mt-3"><%= link_to "Editar perfil", edit_user_registration_path%></button>
-						  <% if (@usuario.user_type_id != 4) %>
+						  <% if (@usuario.user_type_id != 4 && @usuario.user_type_id!=1) %>
 						<button class="btn btn-lg btn-block btn-white col-2 offset-1 mt-3"><%= link_to "Mis reservas",  user_reserveList_path(current_user.id)%></button>
 						<%end%>
 						<button class="btn btn-lg btn-block btn-white col-2 offset-1 mt-3"><%= link_to "Volver", root_path%></button>

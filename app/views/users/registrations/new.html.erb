@@ -101,20 +101,12 @@
 
                     </div>
                     <div class="col-4">
-
-                              <select class="form-control" id="user_date_venc_year">
-                              <option>2019</option>
-                              <option>2020</option>
-                              <option>2021</option>
-                              <option>2022</option>
-                              <option>2023</option>
-                              <option>2024</option>
-                              <option>2025</option>
-                              <option>2026</option>
-                              <option>2027</option>
-
-                            </select>
-
+                      <div class="form-group" >
+                        <% f.label :date_venc_year,"año"%>
+                       <%= f.select :date_venc_year, options_for_select(['2019','2020','2021','2022',
+                         '2023','2024','2025','2026','2028']),
+                       {include_blank: 'Año '}, {class: 'form-control m-b', required: true}%>
+                       </div>
                         </div>
             </div>
 
